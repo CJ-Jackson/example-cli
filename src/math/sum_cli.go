@@ -14,8 +14,8 @@ type sumCli struct {
 func (sC *sumCli) CommandConfigure(c *cli.Command) {
 	c.SetName("math:sum").
 		SetDescription("Add two numbers together").
-		AddArgument("Number1", "", true, arguments.Int{Ptr: &sC.number1, MinZero: true}).
-		AddArgument("Number2", "", true, arguments.Int{Ptr: &sC.number2, MinZero: true})
+		AddArgument("Number1", "", arguments.Int{Ptr: &sC.number1, MinZero: true}).
+		AddArgument("Number2", "", arguments.Int{Ptr: &sC.number2, MinZero: true})
 }
 
 func (sC *sumCli) CommandExecute() {

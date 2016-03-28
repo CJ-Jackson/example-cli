@@ -30,10 +30,6 @@ func newCli() *cli {
 	}
 }
 
-var (
-	main_cli = newCli()
-)
-
 func (c *cli) registerGlobal(global GlobalInterface) {
 	c.Lock()
 
@@ -78,6 +74,10 @@ func (c *cli) registerCommand(command CommandInterface) {
 	command.CommandConfigure(_command)
 
 	_command.postCheck()
+
+	execFunctionIfNotNil(c.commands[_command.name], func() {
+		panic("'" + _command.name + "' has already been taken")
+	})
 
 	c.commands[_command.name] = _command
 }
@@ -128,7 +128,7 @@ func (c *cli) helpInGeneral() {
 }
 
 func (c *cli) helpWithCommand() {
-	defer handleErrorAndPanicAgain("Command Help: ")
+	defer handleErrorAndPanicAgain("Command: ")
 
 	command := c.commands[c.args.arguments[0]]
 

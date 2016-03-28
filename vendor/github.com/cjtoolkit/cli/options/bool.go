@@ -19,10 +19,10 @@ func (b Bool) PreCheck() {
 	}
 }
 
-func (b Bool) Constaint() string {
+func (b Bool) Constraint() string {
 	return "Type:'bool' Default:'" + fmt.Sprint(*b.Ptr) + "'"
 }
 
 func (b Bool) OptionTransform(option cli.OptionsInterface) {
-	*b.Ptr = option.HasOne()
+	*b.Ptr = !*b.Ptr
 }

@@ -9,11 +9,10 @@ Implement:
 	OptionsInterface
 */
 type options struct {
-	options   map[string][]string
-	count     map[string]int
-	check     map[string]bool
-	name      string
-	mandatory bool
+	options map[string][]string
+	count   map[string]int
+	check   map[string]bool
+	name    string
 }
 
 func newOption(op map[string][]string) *options {
@@ -26,30 +25,20 @@ func newOption(op map[string][]string) *options {
 
 func (o *options) setName(name string) {
 	o.name = name
+
+	o.markCheck()
 }
 
 func (o *options) GetName() string {
 	return o.name
 }
 
-func (o *options) setMandatory(mandatory bool) {
-	o.mandatory = mandatory
-}
-
-func (o *options) ExecOnMandatory(fn func()) {
-	if o.mandatory && nil != fn {
-		fn()
-	}
-}
-
 func (o *options) HasOne() bool {
-	o.markCheck()
 	return nil != o.options[o.name]
 }
 
 func (o *options) increment() {
 	o.count[o.name]++
-	o.markCheck()
 }
 
 func (o *options) GetOne() string {
@@ -57,12 +46,12 @@ func (o *options) GetOne() string {
 		return ""
 	}
 	defer o.increment()
+
 	return o.options[o.name][o.count[o.name]]
 }
 
 func (o *options) delete() {
 	o.count[o.name] = len(o.options[o.name])
-	o.markCheck()
 }
 
 func (o *options) GetAll() []string {
@@ -70,6 +59,7 @@ func (o *options) GetAll() []string {
 		return nil
 	}
 	defer o.delete()
+
 	return o.options[o.name][o.count[o.name]:]
 }
 

@@ -7,18 +7,18 @@ import (
 
 type Global struct {
 	global  GlobalInterface
-	options []*globalOption
+	options []*option
 }
 
 func newGlobal(global GlobalInterface) *Global {
 	return &Global{
 		global:  global,
-		options: []*globalOption{},
+		options: []*option{},
 	}
 }
 
 func (g *Global) AddOption(name, description string, transformer OptionTransformerInterface) *Global {
-	g.options = append(g.options, &globalOption{
+	g.options = append(g.options, &option{
 		Name:        strings.TrimSpace(name),
 		Description: strings.TrimSpace(description),
 		Transformer: transformer,
@@ -50,7 +50,7 @@ func (g *Global) collectGeneralHelp(helpData *help.GeneralHelp) {
 		helpData.GlobalsOptions = append(helpData.GlobalsOptions, help.Option{
 			Name:        op.Name,
 			Description: op.Description,
-			Constraint:  op.Constaint,
+			Constraint:  op.Constraint,
 		})
 	}
 }

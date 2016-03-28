@@ -28,7 +28,7 @@ func (f Float) PreCheck() {
 	}
 }
 
-func (f Float) Constaint() string {
+func (f Float) Constraint() string {
 	str := "Type:'float64' Default:'" + fmt.Sprint(*f.Ptr) + "'"
 
 	if f.MinZero || 0 != f.Min {
@@ -43,8 +43,6 @@ func (f Float) Constaint() string {
 }
 
 func (f Float) OptionTransform(option cli.OptionsInterface) {
-	option.ExecOnMandatory(CreatePanicFunctionOnFalse(option.HasOne(), option.GetName()))
-
 	f.populatePointer(option.GetOne())
 	f.validate()
 }

@@ -19,7 +19,6 @@ func newArgumentOptions(values []string) argumentOptions {
 		switch {
 		case utf8.RuneCountInString(value) < 2 || "--" != value[:2]:
 			_arguments = append(_arguments, value)
-		case len(value) <= 1: // Do nothing
 		case "--help" == value:
 			_help = true
 		case utf8.RuneCountInString(value) > 2:

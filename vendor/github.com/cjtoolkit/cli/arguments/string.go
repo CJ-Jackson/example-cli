@@ -24,7 +24,7 @@ func (s String) PreCheck() {
 	}
 }
 
-func (s String) Constaint() string {
+func (s String) Constraint() string {
 	str := "Type:'string' Default:'" + *s.Ptr + "'"
 
 	if s.MinRune > 0 {

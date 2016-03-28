@@ -27,7 +27,7 @@ func (f Float) PreCheck() {
 	}
 }
 
-func (f Float) Constaint() string {
+func (f Float) Constraint() string {
 	str := "Type:'float64' Default:'" + fmt.Sprint(*f.Ptr) + "'"
 
 	if f.MinZero || 0 != f.Min {

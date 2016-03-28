@@ -2,6 +2,6 @@ package cli
 
 type OptionTransformerInterface interface {
 	PreCheck()
-	Constaint() string
+	Constraint() string
 	OptionTransform(option OptionsInterface)
 }

@@ -4,7 +4,6 @@ type commandArgument struct {
 	Name        string
 	Constraint  string
 	Description string
-	Mandatory   bool
 	Transformer ArgumentTransformerInterface
 }
 
@@ -19,7 +18,7 @@ func (cA *commandArgument) postCheck() {
 	default:
 		defer handleErrorAndPanicAgain(cA.Name + ": Transformer: ")
 		cA.Transformer.PreCheck()
-		cA.Constraint = cA.Transformer.Constaint()
+		cA.Constraint = cA.Transformer.Constraint()
 	}
 }
 

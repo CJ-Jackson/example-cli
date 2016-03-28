@@ -3,7 +3,7 @@ package http
 import (
 	"fmt"
 	"github.com/cjtoolkit/cli"
-	"github.com/cjtoolkit/cli/arguments"
+	"github.com/cjtoolkit/cli/options"
 	"net/http"
 )
 
@@ -16,7 +16,7 @@ func (hC *httpCli) CommandConfigure(c *cli.Command) {
 
 	c.SetName("http:start:server").
 		SetDescription("Run HTTP Server").
-		AddArgument("address", "Listening address", false, arguments.String{Ptr: &hC.address})
+		AddOption("address", "Listening address", options.String{Ptr: &hC.address})
 }
 
 func (hC *httpCli) CommandExecute() {

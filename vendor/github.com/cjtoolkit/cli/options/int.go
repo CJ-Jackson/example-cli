@@ -29,7 +29,7 @@ func (i Int) PreCheck() {
 	}
 }
 
-func (i Int) Constaint() string {
+func (i Int) Constraint() string {
 	str := "Type:'int64' Default:'" + fmt.Sprint(*i.Ptr) + "'"
 
 	if i.MinZero || 0 != i.Min {
@@ -44,8 +44,6 @@ func (i Int) Constaint() string {
 }
 
 func (i Int) OptionTransform(option cli.OptionsInterface) {
-	option.ExecOnMandatory(CreatePanicFunctionOnFalse(option.HasOne(), option.GetName()))
-
 	i.populatePointer(option.GetOne())
 	i.validate()
 }

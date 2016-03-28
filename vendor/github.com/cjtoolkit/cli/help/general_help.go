@@ -21,7 +21,7 @@ General Help:
 
 {{- if .HasGlobalOptions}}
 
-Global Option{{.GlobalsOptions.Plural}}: (They do not count as argument.)
+Global Option{{.GlobalsOptions.Plural}}: (They do not count as argument)
 
   Name{{"Name"|.NameSpacer}}Description{{"Description"|.DescriptionSpacer}}Constraint
 {{range .GlobalsOptions}}{{"  " -}}
@@ -31,7 +31,7 @@ Global Option{{.GlobalsOptions.Plural}}: (They do not count as argument.)
 {{else}}
 {{end}}
 {{if .HasCommands -}}
-Command{{.Commands.Plural}}: (Add '--help' before or after the command name, to get more details.)
+Command{{.Commands.Plural}}: (Add '--help' before or after the command name, to get more details)
 
   Name{{"Name"|.NameSpacer}}Description
 {{range .TopCommand -}}

@@ -2,6 +2,6 @@ package cli
 
 type ArgumentTransformerInterface interface {
 	PreCheck()
-	Constaint() string
+	Constraint() string
 	ArgumentTransform(argument string)
 }

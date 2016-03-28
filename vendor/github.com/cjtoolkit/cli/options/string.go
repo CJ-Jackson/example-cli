@@ -25,7 +25,7 @@ func (s String) PreCheck() {
 	}
 }
 
-func (s String) Constaint() string {
+func (s String) Constraint() string {
 	str := "Type:'string' Default:'" + *s.Ptr + "'"
 
 	if 0 != s.MinRune {
@@ -44,10 +44,7 @@ func (s String) Constaint() string {
 }
 
 func (s String) OptionTransform(option cli.OptionsInterface) {
-	option.ExecOnMandatory(CreatePanicFunctionOnFalse(option.HasOne(), option.GetName()))
-
 	*s.Ptr = option.GetOne()
-
 	s.validate()
 }
 

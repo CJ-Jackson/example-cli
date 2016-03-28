@@ -28,7 +28,7 @@ func (i Int) PreCheck() {
 	}
 }
 
-func (i Int) Constaint() string {
+func (i Int) Constraint() string {
 	str := "Type:'int64' Default:'" + fmt.Sprint(*i.Ptr) + "'"
 
 	if i.MinZero || 0 != i.Min {

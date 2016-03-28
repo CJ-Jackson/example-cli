@@ -28,7 +28,7 @@ func (t Time) PreCheck() {
 	}
 }
 
-func (t Time) Constaint() string {
+func (t Time) Constraint() string {
 	str := fmt.Sprintf("Type:'time.Time' Format:'%s' Default:'%s'", t.Format, (*t.Ptr).Format(t.Format))
 
 	if t.MinZero || !t.Min.IsZero() {
@@ -43,8 +43,6 @@ func (t Time) Constaint() string {
 }
 
 func (t Time) OptionTransform(option cli.OptionsInterface) {
-	option.ExecOnMandatory(CreatePanicFunctionOnFalse(option.HasOne(), option.GetName()))
-
 	t.populatePointer(option.GetOne())
 	t.validate()
 }
