@@ -16,7 +16,10 @@ func (gC *greetCommand) CommandConfigure(c *cli.Command) {
 	c.SetName("demo:greet").
 		SetDescription("Greet someone").
 		AddOption("name", "Who do you want to greet?",
-			options.String{Ptr: &gC.text}).
+			options.String{
+				Ptr: &gC.text,
+				MaxRune: 50,
+			}).
 		AddOption("yell", "If set, the task will yell in uppercase letters",
 			options.Bool{Ptr: &gC.yell})
 }
