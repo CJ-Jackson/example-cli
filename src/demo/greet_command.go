@@ -8,7 +8,7 @@ import (
 )
 
 type greetCommand struct {
-	name string
+	text string
 	yell bool
 }
 
@@ -16,23 +16,23 @@ func (gC *greetCommand) CommandConfigure(c *cli.Command) {
 	c.SetName("demo:greet").
 		SetDescription("Greet someone").
 		AddOption("name", "Who do you want to greet?",
-			options.String{Ptr: &gC.name}).
+			options.String{Ptr: &gC.text}).
 		AddOption("yell", "If set, the task will yell in uppercase letters",
 			options.Bool{Ptr: &gC.yell})
 }
 
 func (gC *greetCommand) CommandExecute() {
-	if "" == gC.name {
-		gC.name = "Hello!"
+	if "" == gC.text {
+		gC.text = "Hello!"
 	} else {
-		gC.name = "Hello " + gC.name + "!"
+		gC.text = "Hello " + gC.text + "!"
 	}
 
 	if gC.yell {
-		gC.name = strings.ToUpper(gC.name)
+		gC.text = strings.ToUpper(gC.text)
 	}
 
-	fmt.Println(gC.name)
+	fmt.Println(gC.text)
 }
 
 func init() {
