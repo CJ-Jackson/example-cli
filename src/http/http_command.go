@@ -7,11 +7,11 @@ import (
 	"net/http"
 )
 
-type httpCli struct {
+type httpCommand struct {
 	address string
 }
 
-func (hC *httpCli) CommandConfigure(c *cli.Command) {
+func (hC *httpCommand) CommandConfigure(c *cli.Command) {
 	hC.address = ":8080"
 
 	c.SetName("http:start:server").
@@ -19,7 +19,7 @@ func (hC *httpCli) CommandConfigure(c *cli.Command) {
 		AddOption("address", "Listening address", options.String{Ptr: &hC.address})
 }
 
-func (hC *httpCli) CommandExecute() {
+func (hC *httpCommand) CommandExecute() {
 	fmt.Printf("Running HTTP Server on '%s' (Ctrl + C to exit)...", hC.address)
 	fmt.Println()
 
@@ -27,5 +27,5 @@ func (hC *httpCli) CommandExecute() {
 }
 
 func init() {
-	cli.RegisterCommand(&httpCli{})
+	cli.RegisterCommand(&httpCommand{})
 }

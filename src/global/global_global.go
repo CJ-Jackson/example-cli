@@ -9,20 +9,20 @@ import (
 Implement:
 	GlobalInterface in "githun.com/cjtoolkit/cli"
 */
-type globalCli struct{}
+type globalGlobal struct{}
 
-func (_ globalCli) GlobalConfigure(g *cli.Global) {
+func (_ globalGlobal) GlobalConfigure(g *cli.Global) {
 	g.AddOption("prod", "Set to Production Mode", options.Bool{Ptr: &global.Prod})
 }
 
-func (_ globalCli) Lock() {
+func (_ globalGlobal) Lock() {
 	globalSync.Lock()
 }
 
-func (_ globalCli) Unlock() {
+func (_ globalGlobal) Unlock() {
 	globalSync.Unlock()
 }
 
 func init() {
-	cli.RegisterGlobal(globalCli{})
+	cli.RegisterGlobal(globalGlobal{})
 }

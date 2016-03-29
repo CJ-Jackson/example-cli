@@ -8,13 +8,13 @@ import (
 	"time"
 )
 
-type ageCli struct {
+type ageCommand struct {
 	name string
 	dob  time.Time
 	now  time.Time
 }
 
-func (aC *ageCli) CommandConfigure(c *cli.Command) {
+func (aC *ageCommand) CommandConfigure(c *cli.Command) {
 	aC.now = time.Now()
 
 	c.SetName("date:dob").
@@ -31,7 +31,7 @@ func (aC *ageCli) CommandConfigure(c *cli.Command) {
 		})
 }
 
-func (aC *ageCli) CommandExecute() {
+func (aC *ageCommand) CommandExecute() {
 	duration := aC.now.Sub(aC.dob)
 	fmt.Printf("Hello, my name is '%s' and I'm '%d' years old", aC.name,
 		time.Date(0, 0, 0, 0, 0, int(duration.Seconds()), 0, aC.now.Location()).Year())
@@ -39,5 +39,5 @@ func (aC *ageCli) CommandExecute() {
 }
 
 func init() {
-	cli.RegisterCommand(&ageCli{})
+	cli.RegisterCommand(&ageCommand{})
 }
