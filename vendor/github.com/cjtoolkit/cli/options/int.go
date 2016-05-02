@@ -18,10 +18,15 @@ type Int struct {
 	MaxZero bool
 }
 
-const (
-	INT_BIT    = 64
-	INT_DINARY = 10
-)
+func NewInt(ptr *int64, options ...func(*Int)) Int {
+	i := Int{Ptr: ptr}
+
+	for _, option := range options {
+		option(&i)
+	}
+
+	return i
+}
 
 func (i Int) PreCheck() {
 	if nil == i.Ptr {

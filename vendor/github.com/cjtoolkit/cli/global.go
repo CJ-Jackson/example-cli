@@ -38,8 +38,6 @@ func (g *Global) checkAllOptions() {
 }
 
 func (g *Global) populateOptions(op *options) {
-	g.global.Lock()
-	defer g.global.Unlock()
 	for _, option := range g.options {
 		option.populate(op)
 	}

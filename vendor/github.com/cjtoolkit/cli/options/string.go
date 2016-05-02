@@ -18,6 +18,16 @@ type String struct {
 	Pattern *regexp.Regexp
 }
 
+func NewString(ptr *string, options ...func(*String)) String {
+	s := String{Ptr: ptr}
+
+	for _, option := range options {
+		option(&s)
+	}
+
+	return s
+}
+
 func (s String) PreCheck() {
 	switch {
 	case nil == s.Ptr:

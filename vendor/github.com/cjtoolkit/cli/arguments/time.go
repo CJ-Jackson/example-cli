@@ -18,6 +18,16 @@ type Time struct {
 	MaxZero bool
 }
 
+func NewTime(ptr *time.Time, format string, options ...func(*Time)) Time {
+	t := Time{Ptr: ptr, Format: format}
+
+	for _, option := range options {
+		option(&t)
+	}
+
+	return t
+}
+
 func (t Time) PreCheck() {
 	switch {
 	case nil == t.Ptr:
@@ -28,7 +38,7 @@ func (t Time) PreCheck() {
 }
 
 func (t Time) Constraint() string {
-	str := fmt.Sprintf("Type:'time.Time' Format:'%s' Default:'%s'", t.Format, (*t.Ptr).Format(t.Format))
+	str := fmt.Sprintf("Type:'time.Time' Format:'%s'", t.Format)
 
 	if t.MinZero || !t.Min.IsZero() {
 		str += fmt.Sprint(" Min:'", t.Min.Format(t.Format), "'")

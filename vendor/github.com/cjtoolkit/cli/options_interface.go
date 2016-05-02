@@ -5,4 +5,5 @@ type OptionsInterface interface {
 	HasOne() bool
 	GetOne() string
 	GetAll() []string
+	Len() int
 }

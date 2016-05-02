@@ -19,16 +19,10 @@ func (aC *ageCommand) CommandConfigure(c *cli.Command) {
 
 	c.SetName("date:dob").
 		SetDescription("Calculate Date of Birth").
-		AddArgument("name", "Your Name", arguments.String{
-			Ptr:     &aC.name,
-			MinRune: 5,
-			Pattern: regexp.MustCompile(`^[A-Za-z]*$`),
-		}).
-		AddArgument("dob", "Your date of birth", arguments.Time{
-			Ptr:    &aC.dob,
-			Format: "02-01-2006",
-			Max:    aC.now,
-		})
+		AddArgument("name", "Your Name", arguments.NewString(&aC.name,
+			arguments.StringMinRune(5), arguments.StringPattern(regexp.MustCompile(`^[A-Za-z]*$`)))).
+		AddArgument("dob", "Your date of birth", arguments.NewTime(&aC.dob, "02-01-2006",
+			arguments.TimeMax(aC.now)))
 }
 
 func (aC *ageCommand) CommandExecute() {

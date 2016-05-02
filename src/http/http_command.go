@@ -16,7 +16,7 @@ func (hC *httpCommand) CommandConfigure(c *cli.Command) {
 
 	c.SetName("http:start:server").
 		SetDescription("Run HTTP Server").
-		AddOption("address", "Listening address", options.String{Ptr: &hC.address})
+		AddOption("address", "Listening address", options.NewString(&hC.address))
 }
 
 func (hC *httpCommand) CommandExecute() {

@@ -18,9 +18,15 @@ type Float struct {
 	MaxZero bool
 }
 
-const (
-	FLOAT_BIT = 64
-)
+func NewFloat(ptr *float64, options ...func(*Float)) Float {
+	f := Float{Ptr:ptr}
+
+	for _, option := range options {
+		option(&f)
+	}
+
+	return f
+}
 
 func (f Float) PreCheck() {
 	if nil == f.Ptr {

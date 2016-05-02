@@ -12,15 +12,7 @@ Implement:
 type globalGlobal struct{}
 
 func (_ globalGlobal) GlobalConfigure(g *cli.Global) {
-	g.AddOption("prod", "Set to Production Mode", options.Bool{Ptr: &global.Prod})
-}
-
-func (_ globalGlobal) Lock() {
-	globalSync.Lock()
-}
-
-func (_ globalGlobal) Unlock() {
-	globalSync.Unlock()
+	g.AddOption("prod", "Set to Production Mode", options.NewBool(&global.Prod))
 }
 
 func init() {

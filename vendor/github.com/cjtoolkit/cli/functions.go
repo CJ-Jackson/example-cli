@@ -65,14 +65,24 @@ func execFunctionIfNotNil(value interface{}, fn func()) {
 	}
 }
 
+// Best place to call this is in the main function, in the main package.
 func Run() {
 	main_cli.run()
 }
 
+// Can only be called once.
 func RegisterGlobal(global GlobalInterface) {
 	main_cli.registerGlobal(global)
 }
 
 func RegisterCommand(command CommandInterface) {
 	main_cli.registerCommand(command)
+}
+
+func SetCmdStartEvent(start func(cmdName string, args []string)) {
+	main_cli.event.setStart(start)
+}
+
+func SetCmdFinishEvent(finish func(cmdName string, args []string, recv interface{})) {
+	main_cli.event.setFinish(finish)
 }

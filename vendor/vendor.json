@@ -4,13 +4,13 @@
 	"package": [
 		{
 			"path": "github.com/cjtoolkit/cli",
-			"revision": "50ea0c14d06fb1354a98e48d6b0aab534a0e3a4e",
-			"revisionTime": "2016-03-28T21:59:01+01:00"
+			"revision": "f2cbeb1ec99d7f0281e9e1dc8a1bfcf64aa030a0",
+			"revisionTime": "2016-05-02T12:04:16+01:00"
 		},
 		{
 			"path": "github.com/cjtoolkit/cli/arguments",
-			"revision": "50ea0c14d06fb1354a98e48d6b0aab534a0e3a4e",
-			"revisionTime": "2016-03-28T21:59:01+01:00"
+			"revision": "f2cbeb1ec99d7f0281e9e1dc8a1bfcf64aa030a0",
+			"revisionTime": "2016-05-02T12:04:16+01:00"
 		},
 		{
 			"path": "github.com/cjtoolkit/cli/help",
@@ -19,8 +19,8 @@
 		},
 		{
 			"path": "github.com/cjtoolkit/cli/options",
-			"revision": "50ea0c14d06fb1354a98e48d6b0aab534a0e3a4e",
-			"revisionTime": "2016-03-28T21:59:01+01:00"
+			"revision": "f2cbeb1ec99d7f0281e9e1dc8a1bfcf64aa030a0",
+			"revisionTime": "2016-05-02T12:04:16+01:00"
 		}
 	]
 }

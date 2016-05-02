@@ -17,9 +17,15 @@ type Float struct {
 	MaxZero bool
 }
 
-const (
-	FLOAT_BIT = 64
-)
+func NewFloat(ptr *float64, options ...func(*Float)) Float {
+	f := Float{Ptr:ptr}
+
+	for _, option := range options {
+		option(&f)
+	}
+
+	return f
+}
 
 func (f Float) PreCheck() {
 	if nil == f.Ptr {
@@ -28,7 +34,7 @@ func (f Float) PreCheck() {
 }
 
 func (f Float) Constraint() string {
-	str := "Type:'float64' Default:'" + fmt.Sprint(*f.Ptr) + "'"
+	str := "Type:'float64'"
 
 	if f.MinZero || 0 != f.Min {
 		str += fmt.Sprint(" Min:'", f.Min, "'")

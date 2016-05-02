@@ -90,3 +90,7 @@ func (o *options) checkForUnrecognisedOption() {
 
 	panic(msg)
 }
+
+func (o *options) Len() int {
+	return len(o.options[o.name])
+}

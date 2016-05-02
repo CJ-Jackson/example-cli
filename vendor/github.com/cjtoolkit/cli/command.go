@@ -80,10 +80,13 @@ func (c *Command) checkAllArgument() {
 	}
 }
 
-func (c *Command) execCommand(argOp argumentOptions) {
+func (c *Command) execCommand(argOp argumentOptions, event *event) {
 	c.populateOptions(argOp.options)
 	argOp.options.checkForUnrecognisedOption()
 	c.populateArgument(argOp.arguments[1:])
+	event.executeStart()
+	defer event.executeFinish()
+	execPre(c.command)
 	c.command.CommandExecute()
 }
 

@@ -9,6 +9,10 @@ type StringSlice struct {
 	Ptr *[]string
 }
 
+func NewStringSlice(ptr *[]string) StringSlice {
+	return StringSlice{Ptr: ptr}
+}
+
 func (sS StringSlice) PreCheck() {
 	if nil == sS.Ptr {
 		panic("Ptr cannot be nil")

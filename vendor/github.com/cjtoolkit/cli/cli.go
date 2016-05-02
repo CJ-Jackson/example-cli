@@ -4,17 +4,16 @@ import (
 	"github.com/cjtoolkit/cli/help"
 	"io"
 	"os"
-	"sync"
 )
 
 type cli struct {
-	sync.Mutex
 	args     argumentOptions
 	global   *Global
 	commands map[string]*Command
 	stdErr   io.Writer
 	stdOut   io.Writer
 	exitFn   func()
+	event    *event
 }
 
 func newCli() *cli {
@@ -27,16 +26,12 @@ func newCli() *cli {
 			os.Stderr.Write([]byte(NEW_LINE))
 			os.Exit(1)
 		},
+		event: newEvent(),
 	}
 }
 
 func (c *cli) registerGlobal(global GlobalInterface) {
-	c.Lock()
-
-	defer func() {
-		c.Unlock()
-		handleErrorAndPanicAgain("Register Global: ")
-	}()
+	defer handleErrorAndPanicAgain("Register Global: ")
 
 	execFunctionIfNotNil(c.global, func() {
 		panic("cannot be called more than once")
@@ -48,8 +43,6 @@ func (c *cli) registerGlobal(global GlobalInterface) {
 
 	_global := newGlobal(global)
 
-	global.Lock()
-	defer global.Unlock()
 	global.GlobalConfigure(_global)
 
 	_global.postCheck()
@@ -58,12 +51,7 @@ func (c *cli) registerGlobal(global GlobalInterface) {
 }
 
 func (c *cli) registerCommand(command CommandInterface) {
-	c.Lock()
-
-	defer func() {
-		c.Unlock()
-		handleErrorAndPanicAgain("Register Command: ")
-	}()
+	handleErrorAndPanicAgain("Register Command: ")
 
 	execFunctionIfNil(command, func() {
 		panic("command cannot be nil")
@@ -83,8 +71,6 @@ func (c *cli) registerCommand(command CommandInterface) {
 }
 
 func (c *cli) run() {
-	c.Lock()
-	defer c.Unlock()
 	execTrueFalse(c.args.help || 0 == len(c.args.arguments), func() {
 		c.help()
 	}, func() {
@@ -169,5 +155,7 @@ func (c *cli) executeCommand() {
 
 	c.global = nil
 
-	command.execCommand(c.args)
+	c.event.setCmdNameArgs(c.args.arguments[0], os.Args)
+
+	command.execCommand(c.args, c.event)
 }

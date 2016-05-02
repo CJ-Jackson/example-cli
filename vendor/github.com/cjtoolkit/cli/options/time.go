@@ -19,6 +19,16 @@ type Time struct {
 	MaxZero bool
 }
 
+func NewTime(ptr *time.Time, format string, options ...func(*Time)) Time {
+	t := Time{Ptr: ptr, Format: format}
+
+	for _, option := range options {
+		option(&t)
+	}
+
+	return t
+}
+
 func (t Time) PreCheck() {
 	switch {
 	case nil == t.Ptr:

@@ -14,8 +14,8 @@ type sumCommand struct {
 func (sC *sumCommand) CommandConfigure(c *cli.Command) {
 	c.SetName("math:sum").
 		SetDescription("Add two numbers together").
-		AddArgument("Number1", "", arguments.Int{Ptr: &sC.number1, MinZero: true}).
-		AddArgument("Number2", "", arguments.Int{Ptr: &sC.number2, MinZero: true})
+		AddArgument("Number1", "", arguments.NewInt(&sC.number1, arguments.IntMin(0))).
+		AddArgument("Number2", "", arguments.NewInt(&sC.number2, arguments.IntMin(0)))
 }
 
 func (sC *sumCommand) CommandExecute() {
